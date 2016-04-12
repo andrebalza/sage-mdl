@@ -67,6 +67,17 @@ var enabled = {
 // Path to the compiled assets manifest in the dist directory
 var revManifest = path.dist + 'assets.json';
 
+// Lifted from MDL's gulpfile
+var AUTOPREFIXER_BROWSERS = [
+  'ie >= 11',
+  'edge >= 20',
+  'ff >= 44',
+  'chrome >= 48',
+  'safari >= 8',
+  'opera >= 35',
+  'ios >= 8'
+];
+
 // ## Reusable Pipelines
 // See https://github.com/OverZealous/lazypipe
 
@@ -98,11 +109,7 @@ var cssTasks = function(filename) {
     })
     .pipe(concat, filename)
     .pipe(autoprefixer, {
-      browsers: [
-        'last 2 versions',
-        'android 4',
-        'opera 12'
-      ]
+      browsers: AUTOPREFIXER_BROWSERS
     })
     .pipe(cssNano, {
       safe: true
@@ -285,4 +292,24 @@ gulp.task('wiredep', function() {
 // `gulp` - Run a complete build. To compile for production run `gulp --production`.
 gulp.task('default', ['clean'], function() {
   gulp.start('build');
+});
+
+// ### Zip
+// `gulp zip` - Zip up a distribution of the compiled WordPress theme.
+// Run after doing a build.
+gulp.task('zip', function(callback) {
+  return gulp.src([
+    'dist/**/*',
+    'lang/*',
+    'lib/*',
+    'templates/*',
+    '*.css',
+    '*.md',
+    '*.php',
+    '*.txt'
+  ], {
+    base: '.'
+  })
+    .pipe(loadplugins.zip('sage-mdl.zip'))
+    .pipe(gulp.dest('release'));
 });

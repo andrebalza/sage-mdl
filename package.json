@@ -1,15 +1,15 @@
 {
-  "name": "sage",
+  "name": "sage-mdl",
   "version": "8.4.2",
   "author": "Ben Word <ben@benword.com>",
   "homepage": "https://roots.io/sage/",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/roots/sage.git"
+    "url": "git://github.com/andrebalza/sage-mdl.git"
   },
   "bugs": {
-    "url": "https://github.com/roots/sage/issues"
+    "url": "https://github.com/andrebalza/sage-mdl/issues"
   },
   "licenses": [
     {
@@ -48,6 +48,7 @@
     "gulp-uglify": "^1.2.0",
     "imagemin-pngcrush": "^4.1.0",
     "jshint-stylish": "^2.0.1",
+    "gulp-zip": "^3.0.2",
     "lazypipe": "^1.0.1",
     "merge-stream": "^1.0.0",
     "minimist": "^1.1.3",
